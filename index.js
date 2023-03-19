@@ -16,9 +16,8 @@ const starProductBtn = document.getElementById("star-product");
 const fireProductBtn = document.getElementById("fire-product");
 const soldProducts = document.getElementById("sold-products");
 const achievements = document.getElementById("achievements");
-
-// const revenueArr = [];
-// const commissionArr = [];
+const totalRevenue = document.getElementById("total-revenue");
+const totalCommission = document.getElementById("total-commission");
 
 const salesRevenueAndCommissionArr = {
   salesRevenue: [],
@@ -47,9 +46,14 @@ function handleClick() {
         break;
     }
     addBellIconOnProductBtnClick();
-    console.log(salesRevenueAndCommissionArr);
-    // updateHtmlForTotalRevenue();
-    // updateHtmlForTotalCommission();
+    updateRevenueAndCommissionHtml(
+      salesRevenueAndCommissionArr.salesRevenue,
+      totalRevenue
+    );
+    updateRevenueAndCommissionHtml(
+      salesRevenueAndCommissionArr.commission,
+      totalCommission
+    );
   });
 }
 
@@ -69,36 +73,10 @@ function updatesalesRevenueAndCommissionArr(revenue, commission) {
   salesRevenueAndCommissionArr.commission.push(commission);
 }
 
-// function updateHtmlForTotalRevenue() {
-//   document.getElementById(
-//     "total-revenue"
-//   ).textContent = `$ ${calculateTotalRevenue()}`;
-// }
+function updateRevenueAndCommissionHtml(income, htmlElement) {
+  htmlElement.textContent = `$ ${calculateRevenueOrCommission(income)}`;
+}
 
-// function calculateTotalRevenue() {
-//   return revenueArr.reduce(
-//     (totalRevenue, revenue) => totalRevenue + revenue,
-//     0
-//   );
-// }
-
-// function updateRevenueArr(revenue) {
-//   revenueArr.push(revenue);
-// }
-
-// function updateHtmlForTotalCommission() {
-//   document.getElementById(
-//     "total-commission"
-//   ).textContent = `$ ${calculateTotalCommission()}`;
-// }
-
-// function calculateTotalCommission() {
-//   return commissionArr.reduce(
-//     (totalCommission, commission) => totalCommission + commission,
-//     0
-//   );
-// }
-
-// function updatecommissionArr(commission) {
-//   commissionArr.push(commission);
-// }
+function calculateRevenueOrCommission(income) {
+  return income.reduce((total, currIncome) => total + currIncome, 0);
+}
