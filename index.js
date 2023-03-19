@@ -45,7 +45,7 @@ function handleClick() {
       default:
         break;
     }
-    addBellIconOnProductBtnClick();
+    addBellIconOnFirstProductBtnClick();
     updateRevenueAndCommissionHtml(
       salesRevenueAndCommissionArr.salesRevenue,
       totalRevenue
@@ -54,12 +54,13 @@ function handleClick() {
       salesRevenueAndCommissionArr.commission,
       totalCommission
     );
+    addCurrencyIconWhenAmountExceedsThreshold();
   });
 }
 
 handleClick();
 
-function addBellIconOnProductBtnClick() {
+function addBellIconOnFirstProductBtnClick() {
   if (
     soldProducts.innerHTML === productA.emoji ||
     soldProducts.innerHTML === productB.emoji
@@ -79,4 +80,14 @@ function updateRevenueAndCommissionHtml(income, htmlElement) {
 
 function calculateRevenueOrCommission(income) {
   return income.reduce((total, currIncome) => total + currIncome, 0);
+}
+
+function addCurrencyIconWhenAmountExceedsThreshold() {
+  const thresholdAmount = 2500;
+  const totalSalesRevenue = calculateRevenueOrCommission(
+    salesRevenueAndCommissionArr.salesRevenue
+  );
+  if (totalSalesRevenue >= thresholdAmount) {
+    achievements.innerHTML += "💰";
+  }
 }
