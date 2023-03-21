@@ -55,6 +55,7 @@ function handleClick() {
       totalCommission
     );
     addCurrencyIconWhenAmountExceedsThreshold();
+    addPrizeIconWhenSoldFifteenProducts();
   });
 }
 
@@ -89,5 +90,13 @@ function addCurrencyIconWhenAmountExceedsThreshold() {
   );
   if (totalSalesRevenue >= thresholdAmount) {
     achievements.innerHTML += "💰";
+  }
+}
+
+function addPrizeIconOnFifteenthSale() {
+  const soldProductsMultiplier = 15;
+  const salesData = salesRevenueAndCommissionArr.salesRevenue.length;
+  if (salesData % soldProductsMultiplier === 0) {
+    achievements.innerHTML += "🏆";
   }
 }
