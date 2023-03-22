@@ -109,9 +109,3 @@ function addToObjProp(prop, income) {
 function setLocalStorage() {
   localStorage.setItem("data", JSON.stringify(salesAndIncentivesData));
 }
-
-// function getDataFromLocalStorage() {
-//   localStorage.getItem(JSON.parse("data"));
-// }
-
-// console.log(getDataFromLocalStorage());
