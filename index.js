@@ -19,9 +19,11 @@ const achievements = document.getElementById("achievements");
 const totalRevenue = document.getElementById("total-revenue");
 const totalCommission = document.getElementById("total-commission");
 
-const revenueAndCommissionArr = {
-  salesRevenue: [],
-  commission: [],
+const salesAndIncentivesData = {
+  soldProducts: [],
+  earnedAchievements: [],
+  totalRevenue: 0,
+  totalCommission: 0,
 };
 
 handleClick();
@@ -32,69 +34,84 @@ function handleClick() {
     switch (e.target.dataset.product) {
       case "star":
         soldProducts.innerHTML += productA.emoji;
-        updateRevenueAndCommissionArr(productA.revenue, productA.commission);
+        updateObjProp("soldProducts", productA.emoji);
+        addToObjProp("totalRevenue", productA.revenue);
+        addToObjProp("totalCommission", productA.commission);
         break;
       case "fire":
         soldProducts.innerHTML += productB.emoji;
-        updateRevenueAndCommissionArr(productB.revenue, productB.commission);
+        updateObjProp("soldProducts", productB.emoji);
+        addToObjProp("totalRevenue", productB.revenue);
+        addToObjProp("totalCommission", productB.commission);
         break;
       default:
         break;
     }
+    setLocalStorage();
     updateAchievementsHtml();
-    updateRevenueAndCommissionHtml(
-      revenueAndCommissionArr.salesRevenue,
+    updateRevenueOrCommissionHtml(
+      salesAndIncentivesData.totalRevenue,
       totalRevenue
     );
-    updateRevenueAndCommissionHtml(
-      revenueAndCommissionArr.commission,
+    updateRevenueOrCommissionHtml(
+      salesAndIncentivesData.totalCommission,
       totalCommission
     );
   });
 }
 
-function updateRevenueAndCommissionArr(revenue, commission) {
-  revenueAndCommissionArr.salesRevenue.push(revenue);
-  revenueAndCommissionArr.commission.push(commission);
+function updateObjProp(property, value) {
+  salesAndIncentivesData[property].push(value);
 }
 
 function updateAchievementsHtml() {
-  addBellIconOnFirstProductSale();
+  addAndStoreBellIconOnFirstProductSale();
   addCurrencyIconWhenAmountExceedsThreshold();
-  addPrizeIconOnFifteenthSale();
+  addAndStorePrizeIconOnFifteenthSale();
 }
 
-function updateRevenueAndCommissionHtml(income, htmlElement) {
-  htmlElement.textContent = `$ ${calculateRevenueOrCommission(income)}`;
+function updateRevenueOrCommissionHtml(income, htmlElement) {
+  htmlElement.textContent = `$ ${income}`;
 }
 
-function addBellIconOnFirstProductSale() {
+function addAndStoreBellIconOnFirstProductSale() {
   if (
     soldProducts.innerHTML === productA.emoji ||
     soldProducts.innerHTML === productB.emoji
   ) {
     achievements.innerHTML = "🔔";
+    updateObjProp("earnedAchievements", "🔔");
   }
 }
 
 function addCurrencyIconWhenAmountExceedsThreshold() {
   const thresholdAmount = 2500;
-  const totalSalesRevenue = calculateRevenueOrCommission(
-    revenueAndCommissionArr.salesRevenue
-  );
+  const totalSalesRevenue = salesAndIncentivesData.totalRevenue;
   if (totalSalesRevenue >= thresholdAmount) {
     achievements.innerHTML += "💰";
+    updateObjProp("earnedAchievements", "💰");
   }
 }
 
-function addPrizeIconOnFifteenthSale() {
+function addAndStorePrizeIconOnFifteenthSale() {
   const soldProductsMultiplier = 15;
-  const salesData = revenueAndCommissionArr.salesRevenue.length;
+  const salesData = salesAndIncentivesData.totalRevenue;
   if (salesData % soldProductsMultiplier === 0) {
     achievements.innerHTML += "🏆";
+    updateObjProp("earnedAchievements", "🏆");
   }
 }
 
-function calculateRevenueOrCommission(income) {
-  return income.reduce((total, currIncome) => total + currIncome, 0);
+function addToObjProp(prop, income) {
+  salesAndIncentivesData[prop] += income;
 }
+
+function setLocalStorage() {
+  localStorage.setItem("data", JSON.stringify(salesAndIncentivesData));
+}
+
+// function getDataFromLocalStorage() {
+//   localStorage.getItem(JSON.parse("data"));
+// }
+
+// console.log(getDataFromLocalStorage());
