@@ -47,7 +47,6 @@ function handleClick() {
       default:
         break;
     }
-    setLocalStorage();
     updateAchievementsHtml();
     updateRevenueOrCommissionHtml(
       salesAndIncentivesData.totalRevenue,
@@ -57,6 +56,7 @@ function handleClick() {
       salesAndIncentivesData.totalCommission,
       totalCommission
     );
+    setLocalStorage();
   });
 }
 
@@ -107,5 +107,17 @@ function addToObjProp(prop, income) {
 }
 
 function setLocalStorage() {
-  localStorage.setItem("data", JSON.stringify(salesAndIncentivesData));
+  localStorage.setItem("salesData", JSON.stringify(salesAndIncentivesData));
 }
+
+function getDataFromLocalStorage() {
+  return JSON.parse(localStorage.getItem("salesData")) || {};
+}
+
+window.addEventListener("load", (e) => {
+  e.preventDefault();
+  const salesDataFromLocalStorage = getDataFromLocalStorage();
+  if (salesDataFromLocalStorage.soldProducts) {
+    console.log(salesDataFromLocalStorage);
+  }
+});
