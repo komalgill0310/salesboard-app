@@ -55,17 +55,21 @@ function handleClick() {
         break;
     }
     updateAchievementsHtml();
-    updateRevenueOrCommissionHtml(
-      salesAndIncentivesData.totalRevenue,
-      obj["totalRevenue"]
-    );
-    updateRevenueOrCommissionHtml(
-      salesAndIncentivesData.totalCommission,
-      obj["totalCommission"]
-    );
+    renderData("totalRevenue", salesAndIncentivesData.totalRevenue);
+    renderData("totalCommission", salesAndIncentivesData.totalCommission);
+    // updateRevenueOrCommissionHtml(
+    //   obj["totalRevenue"],
+    //   salesAndIncentivesData.totalRevenue
+    // );
+    // updateRevenueOrCommissionHtml(
+    //   obj["totalCommission"],
+    //   salesAndIncentivesData.totalCommission
+    // );
     setLocalStorage();
   });
 }
+
+// what if i pass in property name and the call both objects using the argument passed in to the function
 
 function updateObjProp(property, value) {
   salesAndIncentivesData[property].push(value);
@@ -77,9 +81,10 @@ function updateAchievementsHtml() {
   addAndStorePrizeIconOnFifteenthSale();
 }
 
-function updateRevenueOrCommissionHtml(income, htmlElement) {
-  htmlElement.textContent = `$ ${income}`;
-}
+// function updateRevenueOrCommissionHtml(key, income) {
+//   // htmlElement.textContent = `$ ${income}`;
+//   renderData(key, income);
+// }
 
 function addAndStoreBellIconOnFirstProductSale() {
   if (
@@ -132,7 +137,6 @@ window.addEventListener("load", (e) => {
 // there are two functions which are updating the html, those two function will be replaced by the render function.
 
 function renderData(htmlElement, value) {
-  console.log(htmlElement);
   let data = "";
   if (Array.isArray(value)) {
     value.forEach((element) => {
@@ -143,3 +147,27 @@ function renderData(htmlElement, value) {
   }
   obj[htmlElement].innerHTML = data;
 }
+
+// Puzzle Pieces:
+// 1. Which functions updates the DOM?
+// ==> 1. UpdatesAchievementsHtml
+// =====> 1. addAndStoreBellIconOnFirstProductSale();
+// =====> 2. addCurrencyIconWhenAmountExceedsThreshold();
+// =====> 3. addAndStorePrizeIconOnFifteenthSale();
+// ==> 2. updateRevenueOrCommissionHtml => REPLACED WITH RENDERDATA FUNCTION
+
+// 2. render function takses in two parameters
+// ==> 1. key for the object property
+// ==> 2. value of the object's key whose proeprty is passed in
+
+// ==> 1. When calling render function
+// =====> 1. Pass object's key
+// =====> 2. soldAndIncentivesData's value according to which key is passed in
+
+// First Puzzle Piece: updateRevenueOrCommissionHtml
+// 1. this function has a variable which holds the salesAndIncentivesData property's value
+// 2, second parameter -> the object's property which holds the html element
+
+// 1. Call renderData function inside this function
+// What parameters does this function needs?
+// ===> 1. key and value
