@@ -14,14 +14,21 @@ let productB = {
 
 const starProductBtn = document.getElementById("star-product");
 const fireProductBtn = document.getElementById("fire-product");
-const soldProducts = document.getElementById("sold-products");
-const achievements = document.getElementById("achievements");
-const totalRevenue = document.getElementById("total-revenue");
-const totalCommission = document.getElementById("total-commission");
+// const soldProducts = document.getElementById("sold-products");
+// const achievements = document.getElementById("achievements");
+// const totalRevenue = document.getElementById("total-revenue");
+// const totalCommission = document.getElementById("total-commission");
+
+const obj = {
+  soldProducts: document.getElementById("sold-products"),
+  achievements: document.getElementById("achievements"),
+  totalRevenue: document.getElementById("total-revenue"),
+  totalCommission: document.getElementById("total-commission"),
+};
 
 const salesAndIncentivesData = {
   soldProducts: [],
-  earnedAchievements: [],
+  achievements: [],
   totalRevenue: 0,
   totalCommission: 0,
 };
@@ -33,13 +40,13 @@ function handleClick() {
     e.preventDefault();
     switch (e.target.dataset.product) {
       case "star":
-        soldProducts.innerHTML += productA.emoji;
+        obj["soldProducts"].innerHTML += productA.emoji;
         updateObjProp("soldProducts", productA.emoji);
         addToObjProp("totalRevenue", productA.revenue);
         addToObjProp("totalCommission", productA.commission);
         break;
       case "fire":
-        soldProducts.innerHTML += productB.emoji;
+        obj["soldProducts"].innerHTML += productB.emoji;
         updateObjProp("soldProducts", productB.emoji);
         addToObjProp("totalRevenue", productB.revenue);
         addToObjProp("totalCommission", productB.commission);
@@ -50,11 +57,11 @@ function handleClick() {
     updateAchievementsHtml();
     updateRevenueOrCommissionHtml(
       salesAndIncentivesData.totalRevenue,
-      totalRevenue
+      obj["totalRevenue"]
     );
     updateRevenueOrCommissionHtml(
       salesAndIncentivesData.totalCommission,
-      totalCommission
+      obj["totalCommission"]
     );
     setLocalStorage();
   });
@@ -76,11 +83,11 @@ function updateRevenueOrCommissionHtml(income, htmlElement) {
 
 function addAndStoreBellIconOnFirstProductSale() {
   if (
-    soldProducts.innerHTML === productA.emoji ||
-    soldProducts.innerHTML === productB.emoji
+    obj["soldProducts"].innerHTML === productA.emoji ||
+    obj["soldProducts"].innerHTML === productB.emoji
   ) {
-    achievements.innerHTML = "🔔";
-    updateObjProp("earnedAchievements", "🔔");
+    obj["achievements"].innerHTML = "🔔";
+    updateObjProp("achievements", "🔔");
   }
 }
 
@@ -88,8 +95,8 @@ function addCurrencyIconWhenAmountExceedsThreshold() {
   const thresholdAmount = 2500;
   const totalSalesRevenue = salesAndIncentivesData.totalRevenue;
   if (totalSalesRevenue >= thresholdAmount) {
-    achievements.innerHTML += "💰";
-    updateObjProp("earnedAchievements", "💰");
+    obj["achievements"].innerHTML += "💰";
+    updateObjProp("achievements", "💰");
   }
 }
 
@@ -97,8 +104,8 @@ function addAndStorePrizeIconOnFifteenthSale() {
   const soldProductsMultiplier = 15;
   const salesData = salesAndIncentivesData.totalRevenue;
   if (salesData % soldProductsMultiplier === 0) {
-    achievements.innerHTML += "🏆";
-    updateObjProp("earnedAchievements", "🏆");
+    obj["achievements"].innerHTML += "🏆";
+    updateObjProp("achievements", "🏆");
   }
 }
 
@@ -117,7 +124,22 @@ function getDataFromLocalStorage() {
 window.addEventListener("load", (e) => {
   e.preventDefault();
   const salesDataFromLocalStorage = getDataFromLocalStorage();
-  if (salesDataFromLocalStorage.soldProducts) {
-    console.log(salesDataFromLocalStorage);
+  for (const [key, value] of Object.entries(salesDataFromLocalStorage)) {
+    renderData(key, value);
   }
 });
+
+// there are two functions which are updating the html, those two function will be replaced by the render function.
+
+function renderData(htmlElement, value) {
+  console.log(htmlElement);
+  let data = "";
+  if (Array.isArray(value)) {
+    value.forEach((element) => {
+      data += `<span>${element}</span>`;
+    });
+  } else {
+    data = value;
+  }
+  obj[htmlElement].innerHTML = data;
+}
