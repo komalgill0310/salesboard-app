@@ -15,7 +15,7 @@ let productB = {
 const starProductBtn = document.getElementById("star-product");
 const fireProductBtn = document.getElementById("fire-product");
 
-const obj = {
+const salesAndIncentivesDOMElements = {
   soldProducts: document.getElementById("sold-products"),
   achievements: document.getElementById("achievements"),
   totalRevenue: document.getElementById("total-revenue"),
@@ -121,6 +121,6 @@ function renderData() {
     } else {
       data = `$ ${value}`;
     }
-    obj[key].innerHTML = data;
+    salesAndIncentivesDOMElements[key].innerHTML = data;
   }
 }
