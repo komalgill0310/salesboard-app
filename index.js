@@ -20,8 +20,6 @@ const salesAndIncentivesDOMElements = {
   achievements: document.getElementById("achievements"),
   totalRevenue: document.getElementById("total-revenue"),
   totalCommission: document.getElementById("total-commission"),
-  numOfSoldProducts: document.getElementById("num-of-sold-products"),
-  numOfAchievements: document.getElementById("num-of-achievements"),
 };
 
 let salesAndIncentivesData = {
@@ -29,9 +27,14 @@ let salesAndIncentivesData = {
   achievements: [],
   totalRevenue: 0,
   totalCommission: 0,
-  numOfSoldProducts: 0,
-  numOfAchievements: 0,
 };
+
+function updateSoldAndAchievementCounts() {
+  document.getElementById("num-of-sold-products").textContent =
+    salesAndIncentivesData.soldProducts.length;
+  document.getElementById("num-of-achievements").textContent =
+    salesAndIncentivesData.achievements.length;
+}
 
 handleClick();
 
@@ -100,14 +103,7 @@ function setLocalStorage() {
 
 function getDataFromLocalStorage() {
   return (
-    JSON.parse(localStorage.getItem("salesData")) || {
-      soldProducts: [],
-      achievements: [],
-      totalRevenue: 0,
-      totalCommission: 0,
-      numOfSoldProducts: 0,
-      numOfAchievements: 0,
-    }
+    JSON.parse(localStorage.getItem("salesData")) || salesAndIncentivesData
   );
 }
 
@@ -129,10 +125,5 @@ function renderData() {
     }
     salesAndIncentivesDOMElements[key].innerHTML = data;
   }
+  updateSoldAndAchievementCounts();
 }
-
-// Steps:
-// 1. Create HTML elements in index.html for total number of sales and achievements
-// 2. Get access to those elements in JS
-// 3. Create variables in salesAndIncentivesData object and assign them a value of 0 to each
-// 4. Updates their values with the length of the soldProducts and achievements.
