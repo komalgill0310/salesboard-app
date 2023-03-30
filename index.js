@@ -15,7 +15,7 @@ let productB = {
 const starProductBtn = document.getElementById("star-product");
 const fireProductBtn = document.getElementById("fire-product");
 
-const salesAndIncentivesDOMElements = {
+const salesAndIncentivesDomElements = {
   soldProducts: document.getElementById("sold-products"),
   achievements: document.getElementById("achievements"),
   totalRevenue: document.getElementById("total-revenue"),
@@ -71,8 +71,8 @@ function updateObjProp(property, value) {
 
 function updateAchievements() {
   addBellIconOnFirstProductSale();
-  addCurrencyIconWhenAmountExceedsThreshold();
-  addPrizeIconOnFifteenthSale();
+  addCurrencyIconWhenAmountExceedsThreshold(2500);
+  addPrizeIconOnFifteenthSale(15);
 }
 
 function addBellIconOnFirstProductSale() {
@@ -81,18 +81,14 @@ function addBellIconOnFirstProductSale() {
   }
 }
 
-function addCurrencyIconWhenAmountExceedsThreshold() {
-  const thresholdAmount = 2500;
-  const totalSalesRevenue = salesAndIncentivesData.totalRevenue;
-  if (totalSalesRevenue >= thresholdAmount) {
+function addCurrencyIconWhenAmountExceedsThreshold(threshold) {
+  if (salesAndIncentivesData["totalRevenue"] >= threshold) {
     updateObjProp("achievements", "💰");
   }
 }
 
-function addPrizeIconOnFifteenthSale() {
-  const soldProductsMultiplier = 15;
-  const salesData = salesAndIncentivesData.totalRevenue;
-  if (salesData % soldProductsMultiplier === 0) {
+function addPrizeIconOnFifteenthSale(threshold) {
+  if (salesAndIncentivesData["soldProducts"].length === threshold) {
     updateObjProp("achievements", "🏆");
   }
 }
@@ -123,7 +119,7 @@ function renderData() {
     } else {
       data = `$ ${value}`;
     }
-    salesAndIncentivesDOMElements[key].innerHTML = data;
+    salesAndIncentivesDomElements[key].innerHTML = data;
   }
   updateSoldAndAchievementCounts();
 }
