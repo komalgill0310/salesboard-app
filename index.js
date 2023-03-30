@@ -43,22 +43,25 @@ function handleClick() {
     e.preventDefault();
     switch (e.target.dataset.product) {
       case "star":
-        updateObjProp("soldProducts", productA.emoji);
-        updateObjProp("totalRevenue", productA.revenue);
-        updateObjProp("totalCommission", productA.commission);
+        udpateProductDataAndRender(productA);
         break;
       case "fire":
-        updateObjProp("soldProducts", productB.emoji);
-        updateObjProp("totalRevenue", productB.revenue);
-        updateObjProp("totalCommission", productB.commission);
+        udpateProductDataAndRender(productB);
         break;
       default:
         break;
     }
-    updateAchievements();
-    setLocalStorage();
-    renderData();
   });
+}
+
+function udpateProductDataAndRender(product) {
+  const { emoji, revenue, commission } = product;
+  updateObjProp("soldProducts", emoji);
+  updateObjProp("totalRevenue", revenue);
+  updateObjProp("totalCommission", commission);
+  updateAchievements();
+  setLocalStorage();
+  renderData();
 }
 
 function updateObjProp(property, value) {
@@ -90,6 +93,7 @@ function addCurrencyIconWhenAmountExceedsThreshold(threshold) {
 function addPrizeIconOnFifteenthSale(threshold) {
   if (salesAndIncentivesData["soldProducts"].length === threshold) {
     updateObjProp("achievements", "🏆");
+    console.log("testing");
   }
 }
 
