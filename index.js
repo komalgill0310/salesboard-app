@@ -1,129 +1,116 @@
-// Product A info
-let productA = {
-  emoji: "⭐",
-  revenue: 200,
-  commission: 50,
-};
+// // Product A info
+// let productA = {
+//   emoji: "⭐",
+//   revenue: 200,
+//   commission: 50,
+// };
 
-// Product B info
-let productB = {
-  emoji: "🔥",
-  revenue: 300,
-  commission: 75,
-};
+// // Product B info
+// let productB = {
+//   emoji: "🔥",
+//   revenue: 300,
+//   commission: 75,
+// };
 
-const starProductBtn = document.getElementById("star-product");
-const fireProductBtn = document.getElementById("fire-product");
+// const starProductBtn = document.getElementById("star-product");
+// const fireProductBtn = document.getElementById("fire-product");
+// const soldProducts = document.getElementById("sold-products");
+// const achievements = document.getElementById("achievements");
+// const totalRevenue = document.getElementById("total-revenue");
+// const totalCommission = document.getElementById("total-commission");
 
-const salesAndIncentivesDomElements = {
-  soldProducts: document.getElementById("sold-products"),
-  achievements: document.getElementById("achievements"),
-  totalRevenue: document.getElementById("total-revenue"),
-  totalCommission: document.getElementById("total-commission"),
-};
-
-let salesAndIncentivesData = {
+const salesAndIncentivesData = {
   soldProducts: [],
-  achievements: [],
+  earnedAchievements: [],
   totalRevenue: 0,
   totalCommission: 0,
 };
 
-function updateSoldAndAchievementCounts() {
-  document.getElementById("num-of-sold-products").textContent =
-    salesAndIncentivesData.soldProducts.length;
-  document.getElementById("num-of-achievements").textContent =
-    salesAndIncentivesData.achievements.length;
-}
-
-handleClick();
+// handleClick();
 
 function handleClick() {
   document.addEventListener("click", (e) => {
     e.preventDefault();
     switch (e.target.dataset.product) {
       case "star":
-        udpateProductDataAndRender(productA);
+        soldProducts.innerHTML += productA.emoji;
+        updateObjProp("soldProducts", productA.emoji);
+        addToObjProp("totalRevenue", productA.revenue);
+        addToObjProp("totalCommission", productA.commission);
         break;
       case "fire":
-        udpateProductDataAndRender(productB);
+        soldProducts.innerHTML += productB.emoji;
+        updateObjProp("soldProducts", productB.emoji);
+        addToObjProp("totalRevenue", productB.revenue);
+        addToObjProp("totalCommission", productB.commission);
         break;
       default:
         break;
     }
+    setLocalStorage();
+    updateAchievementsHtml();
+    updateRevenueOrCommissionHtml(
+      salesAndIncentivesData.totalRevenue,
+      totalRevenue
+    );
+    updateRevenueOrCommissionHtml(
+      salesAndIncentivesData.totalCommission,
+      totalCommission
+    );
   });
 }
 
-function udpateProductDataAndRender(product) {
-  const { emoji, revenue, commission } = product;
-  updateObjProp("soldProducts", emoji);
-  updateObjProp("totalRevenue", revenue);
-  updateObjProp("totalCommission", commission);
-  updateAchievements();
-  setLocalStorage();
-  renderData();
-}
-
 function updateObjProp(property, value) {
-  if (Array.isArray(salesAndIncentivesData[property])) {
-    salesAndIncentivesData[property].push(value);
-  } else {
-    salesAndIncentivesData[property] += value;
+  salesAndIncentivesData[property].push(value);
+}
+
+function updateAchievementsHtml() {
+  addAndStoreBellIconOnFirstProductSale();
+  addCurrencyIconWhenAmountExceedsThreshold();
+  addAndStorePrizeIconOnFifteenthSale();
+}
+
+function updateRevenueOrCommissionHtml(income, htmlElement) {
+  htmlElement.textContent = `$ ${income}`;
+}
+
+function addAndStoreBellIconOnFirstProductSale() {
+  if (
+    soldProducts.innerHTML === productA.emoji ||
+    soldProducts.innerHTML === productB.emoji
+  ) {
+    achievements.innerHTML = "🔔";
+    updateObjProp("earnedAchievements", "🔔");
   }
 }
 
-function updateAchievements() {
-  addBellIconOnFirstProductSale();
-  addCurrencyIconWhenAmountExceedsThreshold(2500);
-  addPrizeIconOnFifteenthSale(15);
-}
-
-function addBellIconOnFirstProductSale() {
-  if (salesAndIncentivesData["soldProducts"].length === 1) {
-    updateObjProp("achievements", "🔔");
+function addCurrencyIconWhenAmountExceedsThreshold() {
+  const thresholdAmount = 2500;
+  const totalSalesRevenue = salesAndIncentivesData.totalRevenue;
+  if (totalSalesRevenue >= thresholdAmount) {
+    achievements.innerHTML += "💰";
+    updateObjProp("earnedAchievements", "💰");
   }
 }
 
-function addCurrencyIconWhenAmountExceedsThreshold(threshold) {
-  if (salesAndIncentivesData["totalRevenue"] >= threshold) {
-    updateObjProp("achievements", "💰");
+function addAndStorePrizeIconOnFifteenthSale() {
+  const soldProductsMultiplier = 15;
+  const salesData = salesAndIncentivesData.totalRevenue;
+  if (salesData % soldProductsMultiplier === 0) {
+    achievements.innerHTML += "🏆";
+    updateObjProp("earnedAchievements", "🏆");
   }
 }
 
-function addPrizeIconOnFifteenthSale(threshold) {
-  if (salesAndIncentivesData["soldProducts"].length === threshold) {
-    updateObjProp("achievements", "🏆");
-    console.log("testing");
-  }
+function addToObjProp(prop, income) {
+  salesAndIncentivesData[prop] += income;
 }
 
 function setLocalStorage() {
-  localStorage.setItem("salesData", JSON.stringify(salesAndIncentivesData));
+  localStorage.setItem("data", JSON.stringify(salesAndIncentivesData));
 }
 
-function getDataFromLocalStorage() {
-  return (
-    JSON.parse(localStorage.getItem("salesData")) || salesAndIncentivesData
-  );
-}
-
-window.addEventListener("load", (e) => {
-  e.preventDefault();
-  renderData();
+const checkBox = document.getElementById("checkbox");
+checkBox.addEventListener("change", function () {
+  document.body.classList.toggle("dark");
 });
-
-function renderData() {
-  salesAndIncentivesData = getDataFromLocalStorage();
-  for (const [key, value] of Object.entries(salesAndIncentivesData)) {
-    let data = "";
-    if (Array.isArray(value)) {
-      value.forEach((element) => {
-        data += `<span>${element}</span>`;
-      });
-    } else {
-      data = `$ ${value}`;
-    }
-    salesAndIncentivesDomElements[key].innerHTML = data;
-  }
-  updateSoldAndAchievementCounts();
-}

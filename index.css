@@ -13,24 +13,29 @@ body{
   font-family: 'Poppins', sans-serif;
   box-sizing: border-box;
 }
-/* .container{
-  border:3px solid white;
-} */
+.dark{
+  background-color: #FBFBFB;
+  color: #201A23;
+}
+
+
 h1{
-  font-size: 3rem; /* 48px */
+  font-size: 3rem; 
   line-height: 72px;
   margin-bottom: 0px;
   margin-top: 46px;
 }
+
 h3{
-  font-size: 2rem; /*32px; */
+  font-size: 2rem; 
   line-height: 48px;
   margin-bottom: 0px;
 }
+
 h1:hover,  h3:hover, button:hover{
   text-decoration: underline solid #38BDF8;
-
 }
+
 .person-img{
   border:10px solid #44354A;
   border-radius: 50%;
@@ -53,6 +58,7 @@ button{
   column-gap: 7px;
   margin-top: 45px;
 }
+
 .highlight:hover{
   border:2px solid #38BDF8;
 }
@@ -77,4 +83,78 @@ button{
   border-radius: 50px;
   border:1px solid #44354A;
   margin: 0px auto;
+}
+/*****Toggle dark/Light mode*****/
+
+.toggle-btn{
+  display:flex;
+  justify-content: flex-end;
+  padding: 10px;
+  color: #201A23;
+}
+
+#checkbox{
+  opacity: 0;
+  position: absolute;
+}
+
+.toggle-label{
+  border: 1px solid rgb(52, 52, 53);
+  background-color: rgb(52, 52, 53);;
+  border-radius:15px;
+  position: relative;
+  width: 40px;
+  height:10px;
+  padding: 5px;
+  cursor: pointer;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 0px;
+}
+
+.ball{
+  background-color: #ffffff;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  border-radius: 50%;
+  transition: transform 0.2s linear;
+}
+
+#checkbox:checked + .toggle-label .ball {
+  transform: translateX(24px);
+}
+
+.fa-sun{
+  color: rgb(235, 109, 12);
+}
+
+.fa-moon{
+  color: rgb(251, 251, 109);
+}
+
+/*****RESET BUTTON*****/
+.reset-button{
+  display: block;
+  background-color: black;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  margin-left: auto;
+  color: #FBFBFB;
+  text-decoration: none;
+  border: 1px white solid;
+  font-size: 1rem;
+}
+
+.reset-button:active {
+  background-color: #44354A;
+  box-shadow: 1px 1px #666;
+  text-decoration: none;
+}
+
+.fa-arrow-rotate-right{
+  color: rgb(78, 162, 181);
+  display:block;  /*to center it within button*/
 }
