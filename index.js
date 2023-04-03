@@ -33,6 +33,7 @@ let salesAndIncentivesData = {
 function resetData() {
   localStorage.clear();
   renderData();
+  console.table("resetData");
 }
 
 function updateSoldAndAchievementCounts() {
