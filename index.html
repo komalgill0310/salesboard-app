@@ -5,21 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Salesboard App</title>
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
     <div class="container">
-      <div class="toggle-btn">
-        <input type="checkbox" id="checkbox">
-        <label for="checkbox" class="toggle-label">
-          <i class="fa-solid fa-sun"></i>
-          <i class="fa-solid fa-moon"></i>
-          <span class="ball"></span>
-        </label>
-      </div>
-      <button class="reset-button">
+      <button class="reset-btn" data-button="reset">
         <i class="fa-sharp fa-solid fa-arrow-rotate-right"></i>
       </button>
       <header>
@@ -31,10 +29,10 @@
         />
       </header>
       <div class="product-buttons">
-        <button id="star-product" class="highlight" data-product="star">
+        <button id="star-product" class="highlight" data-button="star">
           ⭐
         </button>
-        <button id="fire-product" class="highlight" data-product="fire">
+        <button id="fire-product" class="highlight" data-button="fire">
           🔥
         </button>
       </div>
