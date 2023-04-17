@@ -1,131 +1,130 @@
-
-body{
+body {
   text-align: center;
-  background-color: #201A23;
-  color: #FBFBFB;
-  font-family: 'Poppins', sans-serif;
+  background-color: #201a23;
+  color: #fbfbfb;
+  font-family: "Poppins", sans-serif;
   box-sizing: border-box;
 }
-.dark{
-  background-color: #FBFBFB;
-  color: #201A23;
+.dark {
+  background-color: #fbfbfb;
+  color: #201a23;
 }
 
-
-h1{
-  font-size: 3rem; 
+h1 {
+  font-size: 3rem;
   line-height: 72px;
   margin-bottom: 0px;
   margin-top: 46px;
 }
 
-h3{
-  font-size: 2rem; 
+h3 {
+  font-size: 2rem;
   line-height: 48px;
   margin-bottom: 0px;
 }
 
-h1:hover,  h3:hover, button:hover{
-  text-decoration: underline solid #38BDF8;
+h1:hover,
+h3:hover,
+button:hover {
+  text-decoration: underline solid #38bdf8;
 }
 
-.person-img{
-  border:10px solid #44354A;
+.person-img {
+  border: 10px solid #44354a;
   border-radius: 50%;
-  width: 219px;
-  height: 219px;
+  width: 225px;
+  height: 225px;
 }
 
-button{
+button {
   width: 188px;
   height: 70px;
-  background-color: #9E4770;
+  background-color: #9e4770;
   border-radius: 10px;
-  line-height: 72px; 
-  font-size: 3rem;  
+  line-height: 72px;
+  font-size: 3rem;
   cursor: pointer;
   text-align: center;
-  
 }
-.product-buttons{
+.product-buttons {
   display: flex;
   justify-content: center;
   column-gap: 7px;
   margin-top: 45px;
 }
-.highlight:hover{
-  border:2px solid #38BDF8;
+.highlight:hover {
+  border: 2px solid #38bdf8;
 }
-.points-box{
+.points-box {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   width: 805px;
   height: 65px;
-  background-color: #44354A;
+  background-color: #44354a;
   border-radius: 50px;
-  border:1px solid #44354A;
+  border: 1px solid #44354a;
   margin: 0px auto;
   font-size: 1.55rem;
   padding-left: 10px;
   column-gap: 0px;
 }
-.total{
-  display:flex;
+.total {
+  display: flex;
   justify-content: center;
   column-gap: 16px;
   margin-bottom: 70px;
 }
-.total-box{
+.total-box {
   width: 389px;
   height: 65px;
-  background-color: #44354A;
+  background-color: #44354a;
   border-radius: 50px;
-  border:1px solid #44354A;
+  border: 1px solid #44354a;
   margin: 0px auto;
   font-size: 2.15rem;
   font-weight: 700;
-  color:#FBFBFB;
-  display:flex;
+  color: #fbfbfb;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
 
 /*****Toggle dark/Light mode*****/
-.toggle-and-reset{
+.toggle-and-reset {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.toggle-btn{
-  display:flex;
+.toggle-btn {
+  display: flex;
   justify-content: flex-end;
   padding: 10px;
-  color: #201A23;
+  color: #201a23;
 }
 
-#checkbox{
+#checkbox {
   opacity: 0;
   position: absolute;
 }
 
-.toggle-label{
+.toggle-label {
   border: 1px solid rgb(52, 52, 53);
-  background-color: rgb(52, 52, 53);;
-  border-radius:15px;
+  background-color: rgb(52, 52, 53);
+  border-radius: 15px;
   position: relative;
   width: 40px;
-  height:10px;
+  height: 10px;
   padding: 5px;
   cursor: pointer;
-  display:flex;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   margin-right: 0px;
 }
 
-.ball{
+.ball {
   background-color: #ffffff;
   width: 22px;
   height: 22px;
@@ -134,38 +133,38 @@ button{
   transition: transform 0.2s linear;
 }
 
-.ballmove{
+.ballmove {
   transform: translateX(24px);
 }
-.fa-sun{
+.fa-sun {
   color: rgb(235, 109, 12);
 }
 
-.fa-moon{
+.fa-moon {
   color: rgb(251, 251, 109);
 }
 
 /*****RESET BUTTON*****/
-.reset-btn{
+.reset-btn {
   background-color: black;
   width: 30px;
   height: 30px;
   margin-left: 10px;
   margin-right: auto;
   margin-top: 0px;
-  color: #FBFBFB;
+  color: #fbfbfb;
   text-decoration: none;
   border: 1px white solid;
   font-size: 1rem;
 }
 
 .reset-btn:active {
-  background-color: #44354A;
+  background-color: #44354a;
   box-shadow: 1px 1px #666;
   text-decoration: none;
 }
 
-.fa-arrow-rotate-right{
+.fa-arrow-rotate-right {
   color: rgb(78, 162, 181);
-  display:block; 
+  display: block;
 }
