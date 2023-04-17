@@ -14,8 +14,7 @@ let productB = {
 
 const starProductBtn = document.getElementById("star-product");
 const fireProductBtn = document.getElementById("fire-product");
-const resetBtn = document.getElementById("reset-btn");
-
+const ballSlide = document.getElementById("ball").classList;
 const salesAndIncentivesDomElements = {
   soldProducts: document.getElementById("sold-products"),
   achievements: document.getElementById("achievements"),
@@ -33,7 +32,6 @@ let salesAndIncentivesData = {
 function resetData() {
   localStorage.clear();
   renderData();
-  console.table("resetData");
 }
 
 function updateSoldAndAchievementCounts() {
@@ -48,7 +46,8 @@ handleClick();
 function handleClick() {
   document.addEventListener("click", (e) => {
     e.preventDefault();
-    switch (e.target.dataset.button) {
+    console.log(e.target.dataset.userSelection);
+    switch (e.target.dataset.userSelection) {
       case "star":
         udpateProductDataAndRender(productA);
         break;
@@ -58,10 +57,18 @@ function handleClick() {
       case "reset":
         resetData();
         break;
+      case "checkboxtoggle":
+        toggleLightDarkMode();
+        break;
       default:
         break;
     }
   });
+}
+
+function toggleLightDarkMode() {
+  ballSlide.toggle("ballmove");
+  document.body.classList.toggle("dark"); 
 }
 
 function udpateProductDataAndRender(product) {

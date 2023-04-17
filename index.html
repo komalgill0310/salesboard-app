@@ -17,25 +17,38 @@
   </head>
   <body>
     <div class="container">
-      <button class="reset-btn">
-        <i
-          class="fa-sharp fa-solid fa-arrow-rotate-right"
-          data-button="reset"
-        ></i>
-      </button>
+      <div class="toggle-and-reset">
+          <div>
+              <button class="reset-btn">
+                <i
+                  class="fa-sharp fa-solid fa-arrow-rotate-right"
+                  data-user-selection="reset"
+                ></i>
+              </button>
+          </div>
+          <div class="toggle-btn">
+            <input type="checkbox" id="checkbox">
+            <label for="checkbox" class="toggle-label">
+              <i class="fa-solid fa-sun" data-user-selection="checkboxtoggle"></i>
+              <i class="fa-solid fa-moon" data-user-selection="checkboxtoggle"></i>
+              <span class="ball" id ="ball" data-user-selection="checkboxtoggle"></span>
+            </label>
+          </div>
+      </div>
+      
       <header>
         <h1>Salesboard🔔</h1>
         <img
-          src="images/picture.jpg"
+          src="images/salesperson.jpg"
           alt="picture of salesperson"
           class="person-img highlight"
         />
       </header>
       <div class="product-buttons">
-        <button id="star-product" class="highlight" data-button="star">
+        <button id="star-product" class="highlight" data-user-selection="star">
           ⭐
         </button>
-        <button id="fire-product" class="highlight" data-button="fire">
+        <button id="fire-product" class="highlight" data-user-selection="fire">
           🔥
         </button>
       </div>
