@@ -4,6 +4,8 @@
 
 <font size=5> Working Version **_[here](https://salesboardwebapp03.netlify.app/)_**</font>
 
+<img src = "images\Demo_salesboard-web-app.gif">
+
 # **Summary**
 
 <font size=5>
