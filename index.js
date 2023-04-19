@@ -15,6 +15,7 @@ let productB = {
 const starProductBtn = document.getElementById("star-product");
 const fireProductBtn = document.getElementById("fire-product");
 const ballSlide = document.getElementById("ball").classList;
+
 const salesAndIncentivesDomElements = {
   soldProducts: document.getElementById("sold-products"),
   achievements: document.getElementById("achievements"),
@@ -29,24 +30,15 @@ let salesAndIncentivesData = {
   totalCommission: 0,
 };
 
-function resetData() {
-  localStorage.clear();
-  renderData();
-}
+init();
 
-function updateSoldAndAchievementCounts() {
-  document.getElementById("num-of-sold-products").textContent =
-    salesAndIncentivesData.soldProducts.length;
-  document.getElementById("num-of-achievements").textContent =
-    salesAndIncentivesData.achievements.length;
+function init() {
+  handleClick();
 }
-
-handleClick();
 
 function handleClick() {
   document.addEventListener("click", (e) => {
     e.preventDefault();
-    console.log(e.target.dataset.userSelection);
     switch (e.target.dataset.userSelection) {
       case "star":
         udpateProductDataAndRender(productA);
@@ -66,11 +58,6 @@ function handleClick() {
   });
 }
 
-function toggleLightDarkMode() {
-  ballSlide.toggle("ballmove");
-  document.body.classList.toggle("dark"); 
-}
-
 function udpateProductDataAndRender(product) {
   const { emoji, revenue, commission } = product;
   updateObjProp("soldProducts", emoji);
@@ -79,6 +66,16 @@ function udpateProductDataAndRender(product) {
   updateAchievements();
   setLocalStorage();
   renderData();
+}
+
+function resetData() {
+  localStorage.clear();
+  renderData();
+}
+
+function toggleLightDarkMode() {
+  ballSlide.toggle("ballmove");
+  document.body.classList.toggle("dark");
 }
 
 function updateObjProp(property, value) {
@@ -93,6 +90,10 @@ function updateAchievements() {
   addBellIconOnFirstProductSale();
   addCurrencyIconWhenAmountExceedsThreshold(2500);
   addPrizeIconOnFifteenthSale(15);
+}
+
+function setLocalStorage() {
+  localStorage.setItem("salesData", JSON.stringify(salesAndIncentivesData));
 }
 
 function addBellIconOnFirstProductSale() {
@@ -113,10 +114,6 @@ function addPrizeIconOnFifteenthSale(threshold) {
   }
 }
 
-function setLocalStorage() {
-  localStorage.setItem("salesData", JSON.stringify(salesAndIncentivesData));
-}
-
 function getDataFromLocalStorage() {
   return (
     JSON.parse(localStorage.getItem("salesData")) || {
@@ -127,11 +124,6 @@ function getDataFromLocalStorage() {
     }
   );
 }
-
-window.addEventListener("load", (e) => {
-  e.preventDefault();
-  renderData();
-});
 
 function renderData() {
   salesAndIncentivesData = getDataFromLocalStorage();
@@ -148,3 +140,15 @@ function renderData() {
   }
   updateSoldAndAchievementCounts();
 }
+
+function updateSoldAndAchievementCounts() {
+  document.getElementById("num-of-sold-products").textContent =
+    salesAndIncentivesData.soldProducts.length;
+  document.getElementById("num-of-achievements").textContent =
+    salesAndIncentivesData.achievements.length;
+}
+
+window.addEventListener("load", (e) => {
+  e.preventDefault();
+  renderData();
+});
