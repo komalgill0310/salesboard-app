@@ -2,7 +2,7 @@
 
 <font size = 6> This application is simply written in **_JavaScript, HTML and CSS_**</font>
 
-<font size=5> Working Version **_[replace it with the netlify link](replace with the original demo gif of the app)_**</font>
+<font size=5> Working Version **_[https://salesboardwebapp03.netlify.app/](replace with the original demo gif of the app)_**</font>
 
 # **Summary**
 
