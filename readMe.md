@@ -29,4 +29,5 @@
 
 # Author
 
-<font size=5>Komal - | Software Developer | [Note Taking App](https://komalgill0310.github.io/Note-taking-Application/) | [LinkedIn](https://www.linkedin.com/in/komalpreet-kaur-3b6924177/)
+<font size=5>Komal - | Software Developer | [Salesboard Web App](https://salesboardwebapp03.netlify.app/) | [LinkedIn](https://www.linkedin.com/in/komalpreet-kaur-3b6924177/)
+<font size=5>Nandhini - | Software Developer | [GitHub](https://github.com/Nandhini0123)
