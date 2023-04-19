@@ -89,8 +89,8 @@ button {
   background-color: #44354a;
   border-radius: 50px;
   border: 1px solid #44354a;
-  margin: auto;
-  font-size: 2.15rem;
+  margin: auto auto 1.77em; /* 61px */
+  font-size: 2.15rem; /* 34.4px */
   font-weight: 700;
   color: #fbfbfb;
   display: flex;
